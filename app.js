@@ -1,30 +1,18 @@
-let news = [];
-let current = 0;
+const video = document.getElementById('video');
 
-fetch('news.json')
-  .then(res => res.json())
-  .then(data => {
-    news = data;
-    showNews();
-  });
+const videoSrc =
+  './stream/playlist.m3u8';
 
-function showNews() {
-  document.getElementById('title').textContent =
-    news[current].title;
+if (Hls.isSupported()) {
+  const hls = new Hls();
 
-  document.getElementById('content').textContent =
-    news[current].content;
+  hls.loadSource(videoSrc);
+  hls.attachMedia(video);
 
-  speak(news[current].title + news[current].content);
-}
-
-function nextNews() {
-  current = (current + 1) % news.length;
-  showNews();
-}
-
-function speak(text) {
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = 'ja-JP';
-  speechSynthesis.speak(utterance);
+} else if (
+  video.canPlayType(
+    'application/vnd.apple.mpegurl'
+  )
+) {
+  video.src = videoSrc;
 }
