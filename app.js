@@ -1,18 +1,35 @@
-const video = document.getElementById('video');
+const playlist = [
 
-const videoSrc =
-  './stream/playlist.m3u8';
+  "news1.mp4",
+  "news2.mp4"
 
-if (Hls.isSupported()) {
-  const hls = new Hls();
+];
 
-  hls.loadSource(videoSrc);
-  hls.attachMedia(video);
+const video =
+  document.getElementById("video");
 
-} else if (
-  video.canPlayType(
-    'application/vnd.apple.mpegurl'
-  )
-) {
-  video.src = videoSrc;
+let current = 0;
+
+function playVideo(index){
+
+  video.src = playlist[index];
+
+  video.play();
 }
+
+video.addEventListener(
+  "ended",
+  () => {
+
+    current++;
+
+    if(current >= playlist.length){
+
+      current = 0;
+    }
+
+    playVideo(current);
+  }
+);
+
+playVideo(current);
