@@ -3,21 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <title>AI NEWS JAPAN</title>
-  <link rel="stylesheet" href="style.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 </head>
 <body>
 
-<div class="container">
-  <h1>AI NEWS JAPAN</h1>
+<h1>AI NEWS JAPAN LIVE</h1>
 
-  <div class="news-box">
-    <h2 id="title"></h2>
-    <p id="content"></p>
-  </div>
-
-  <button onclick="nextNews()">次のニュース</button>
-</div>
+<video
+  id="video"
+  controls
+  autoplay
+  width="100%"
+></video>
 
 <script src="app.js"></script>
+
 </body>
 </html>
